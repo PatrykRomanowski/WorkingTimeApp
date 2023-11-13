@@ -17,6 +17,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import HomeScreen from "./src/HomeScreen";
 import NewDataScreen from "./src/NewDataScreen";
 import ShowResolutionScreen from "./src/ShowResolutionScreen";
+import TimeScreen from "./src/TimeScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -80,7 +81,15 @@ export default function App() {
             name="resolution"
             component={ShowResolutionScreen}
             options={{
-              title: "WRÓĆ DO LOGOWANIA",
+              title: "WRÓĆ DO STRONY GŁÓWNEJ",
+            }}
+          />
+          <Stack.Screen
+            name="timeScreen"
+            component={TimeScreen}
+            options={{
+              title: "WRÓĆ DO AKTYWNOŚCI",
+              headerShown: false,
             }}
           />
         </Stack.Navigator>

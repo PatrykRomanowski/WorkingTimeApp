@@ -1,11 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Text, StyleSheet, TextInput, Button, View } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Font from "expo-font";
 
 const NewDataScreen = () => {
   const [newResolutionName, setNewResolutionName] = useState("");
   const [newTime, setNewTime] = useState();
+
+  useEffect(() => {
+    const loadFonts = async () => {
+      await Font.loadAsync({
+        "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
+        "Bebas-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
+      });
+    };
+    loadFonts();
+  }, []);
 
   const addNewAction = async () => {
     // await AsyncStorage.clear();
@@ -15,13 +33,22 @@ const NewDataScreen = () => {
       if (obj === null) {
         console.log("puste");
         const currentDate = new Date();
+
+        const day = currentDate.getDate();
+        const month = currentDate.getMonth() + 1; // Miesiące są liczone od 0 do 11, więc dodajemy 1
+        const year = currentDate.getFullYear();
+
+        // Formatowanie do postaci "dzień miesiąc rok"
+        const formattedDate = `${day} ${month} ${year}`;
+
         const newObj = {
           allResolutionName: [
             {
               data: currentDate,
               fileName: newResolutionName,
               totalTime: 0,
-              allDate: [{ date: currentDate, secondToday: 0 }],
+              allDate: [{ date: formattedDate, secondToday: 0 }],
+              declaredTime: newTime,
             },
           ],
         };
@@ -29,11 +56,13 @@ const NewDataScreen = () => {
       } else {
         console.log("pełne");
         const currentDate = new Date();
+
         const newObj = {
           data: currentDate,
           fileName: newResolutionName,
           totalTime: 0,
           allDate: [{ date: currentDate, secondToday: 0 }],
+          declaredTime: newTime,
         };
         obj.allResolutionName.push(newObj);
 
@@ -42,9 +71,11 @@ const NewDataScreen = () => {
       }
     });
 
-    console.log("działa");
+    // console.log("działa");
     // console.log(currentDate);2
-    console.log(newTime);
+    // console.log(newTime);
+    setNewTime();
+    setNewResolutionName();
   };
 
   return (
@@ -67,11 +98,9 @@ const NewDataScreen = () => {
         onChangeText={(num) => setNewTime(num)}
         keyboardType="numeric"
       />
-      <Button
-        style={styles.button}
-        title="Dodaj zdarzenie"
-        onPress={addNewAction}
-      ></Button>
+      <TouchableOpacity style={styles.button} onPress={addNewAction}>
+        <Text style={styles.textButton}>DODAJ ZDARZENIE</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -86,12 +115,23 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   button: {
-    marginTop: 20,
+    marginTop: 40,
+    width: "100%",
+    height: 50,
+    backgroundColor: "#90caf9",
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     marginTop: 20,
     padding: 10,
     textAlign: "center",
+    fontSize: 12,
+    fontFamily: "RubikMonoOne-Regular",
+  },
+  textButton: {
+    color: "black",
+    fontFamily: "RubikMonoOne-Regular",
   },
   input: {
     borderBottomWidth: 1, // Dodajemy obramowanie tylko na dole.
@@ -99,6 +139,8 @@ const styles = StyleSheet.create({
     padding: 2,
     width: "50%",
     textAlign: "center",
+    fontFamily: "Roboto-Regular",
+    fontSize: 14,
   },
 });
 
