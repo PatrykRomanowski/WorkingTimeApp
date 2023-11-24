@@ -30,6 +30,8 @@ import "react-native-screens";
 // npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
 // kulczowe jest zainstalowanie tych pakietów i dodanie importów tych powyżej
 
+//  eas build -p android --profile preview
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
