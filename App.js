@@ -19,6 +19,17 @@ import NewDataScreen from "./src/NewDataScreen";
 import ShowResolutionScreen from "./src/ShowResolutionScreen";
 import TimeScreen from "./src/TimeScreen";
 
+import "react-native-gesture-handler";
+
+import "react-native-reanimated";
+
+import "react-native-safe-area-context";
+
+import "react-native-screens";
+
+// npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+// kulczowe jest zainstalowanie tych pakietów i dodanie importów tych powyżej
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
