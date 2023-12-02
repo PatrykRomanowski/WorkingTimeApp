@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as Font from "expo-font";
+// import * as Font from "expo-font";
 
 const NewDataScreen = () => {
   const [newResolutionName, setNewResolutionName] = useState("");
@@ -17,10 +17,10 @@ const NewDataScreen = () => {
 
   useEffect(() => {
     const loadFonts = async () => {
-      await Font.loadAsync({
-        "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
-        "Bebas-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
-      });
+      // await Font.loadAsync({
+      //   "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
+      //   "Bebas-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
+      // });
     };
     loadFonts();
   }, []);
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   title: {
     marginTop: 20,
     padding: 10,

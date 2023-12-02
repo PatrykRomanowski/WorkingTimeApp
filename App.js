@@ -6,13 +6,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-
 import { Provider, useDispatch } from "react-redux";
 import { reloadActions } from "./storage/reload-context";
 
 import store from "./storage";
 
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { FontProvider } from "./src/FontContext";
+
+import { useFonts, Ionicons } from "@expo/vector-icons";
 
 import HomeScreen from "./src/HomeScreen";
 import NewDataScreen from "./src/NewDataScreen";
@@ -83,30 +84,32 @@ function MainStack() {
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Title">
-          <Stack.Screen
-            name="Title"
-            component={MainStack}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="resolution"
-            component={ShowResolutionScreen}
-            options={{
-              title: "WRÓĆ DO STRONY GŁÓWNEJ",
-            }}
-          />
-          <Stack.Screen
-            name="timeScreen"
-            component={TimeScreen}
-            options={{
-              title: "WRÓĆ DO AKTYWNOŚCI",
-              headerShown: false,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <FontProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Title">
+            <Stack.Screen
+              name="Title"
+              component={MainStack}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="resolution"
+              component={ShowResolutionScreen}
+              options={{
+                title: "WRÓĆ DO STRONY GŁÓWNEJ",
+              }}
+            />
+            <Stack.Screen
+              name="timeScreen"
+              component={TimeScreen}
+              options={{
+                title: "WRÓĆ DO AKTYWNOŚCI",
+                headerShown: false,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FontProvider>
     </Provider>
   );
 }

@@ -13,13 +13,14 @@ import {
 } from "react-native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { useFonts } from "./FontContext";
+import { Ionicons } from "@expo/vector-icons";
+// import * as Font from "expo-font";
 
 import { reloadActions } from "../storage/reload-context";
 import { actualResolutionDataActions } from "../storage/actualResolutionData-context";
 
-import * as Font from "expo-font";
+// import * as Font from "expo-font";
 
 const HomeScreen = () => {
   const [userData, setUserData] = useState({});
@@ -70,13 +71,13 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
-    const loadFonts = async () => {
-      await Font.loadAsync({
-        "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
-        "Bebas-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
-      });
-    };
-    loadFonts();
+    // const loadFonts = async () => {
+    //   await Font.loadAsync({
+    //     "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
+    //     "Bebas-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
+    //   });
+    // };
+    // loadFonts();
   }, []);
 
   useEffect(() => {
